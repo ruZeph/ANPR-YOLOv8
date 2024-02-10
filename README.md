@@ -27,7 +27,7 @@ When I implemented the project, I used Tensorflow for GPU v2.12 and PyTorch on C
 
 <u>STEP - 01 : FOR DETECTION</u>
 
-1. Clone the repo (Beware.. It's nearly ~ 4 GB )
+1. Clone the repo.
 2. Make a python virtual environment named `Detection`. Copy following files & folder into it:
  1. bike_samples/
  2. weights/
