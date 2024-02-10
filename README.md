@@ -17,7 +17,7 @@ It doesn't detect Indian Green HSRNs(for EVS) at all.
 
 ## Important !!! Read it
 
-When I implemented the project, I used Tensorflow for GPU v2.12 and PyTorch on CUDA 11.8, which did not conflict at all. But if you try to install current  `tensorflow[and-cuda]` package , they will conflict. So you have to set up two different environments to run the project , i.e., one for the License Plate Detection and one for OCR.
+When I implemented the project, I used Tensorflow for GPU v2.12 and PyTorch on CUDA 11.8, which did not conflict at all. But if you try to install current  `tensorflow[and-cuda]` package , they will conflict. So you have to set up two different environments to run the project , i.e., one for the License Plate Detection and one for OCR if you want to use GPU in project. Normal CPU users don't need to do this.
 
 ---
 
