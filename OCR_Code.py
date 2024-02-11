@@ -1,20 +1,18 @@
-import tensorflow as tf
 import cv2
 
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2' 
 
-
 from essentials import mk_title, show_img, save_img
 import numpy as np
 
 # Initialize tensorflow components
+import tensorflow as tf
 keras = tf.keras
 load_model = keras.models.load_model
 img_to_array = keras.preprocessing.image.img_to_array
 
 count = 1
-
 
 
 def apply_ocr(image, bounding_boxes, op_path=None, org_title=None):

@@ -9,7 +9,6 @@ from ultralytics import YOLO
 from essentials import rotate, show_img, save_img, mk_title
 
 import torch
-import torchvision
 torch.cuda.set_device(0)
 
 

@@ -11,9 +11,7 @@ if __name__ == '__main__':
     BBOX_PATH = 'Cleaned_License_Plate/Bounding_Box/'
     file_paths = sorted(list(paths.list_images(OCR_PATH)), reverse=False)
     bbox_file_paths = sorted(([os.path.join(BBOX_PATH, filename) for filename in os.listdir(BBOX_PATH) if filename.endswith('.pkl')]), reverse=False)
-    print(file_paths)
-    print(bbox_file_paths)
-
+    
     count = 1
 
     for file_path, bbox_file_path in zip(file_paths, bbox_file_paths):
