@@ -3,10 +3,13 @@ _FOR **UBUNTU 22.04 - UBUNTU 23.04** & **WSL Ubuntu 22.04 LTS**_
 _Tested on UBUNTU 23.04 & WSL Ubuntu 22.04 LTS_
 
 #### 1. INSTALL LATEST NVIDIA DRIVERS [<font color="#c3d69b">Only For Ubuntu Distribution</font>]
+Type in the shell.
 
-1. Type in Terminal.
-	`ubuntu-drivers devices`
-	`sudo ubuntu-drivers install nvidia:535` [<font color="#c3d69b">Here Replace 535 with the recommended version in output of previous command</font>]
+	ubuntu-drivers devices
+
+Then install: _[Here Replace 535 with the recommended version in output of previous command]_
+
+	sudo ubuntu-drivers install nvidia:535
 
 ---
 #### 2. INSTALL CUDA 12.1
@@ -30,37 +33,36 @@ wget https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/
 
 - Install the CUDA keyring.
 ```bash
-	sudo dpkg -i cuda-keyring_1.1-1_all.deb
-	sudo apt update
+sudo dpkg -i cuda-keyring_1.1-1_all.deb
+sudo apt update
 ```
 
 -  Install CUDA via following:
 ```bash
-	sudo apt-get install cuda-toolkit-12-1
+sudo apt-get install cuda-toolkit-12-1
 ```
 
 3. Add following PATHS  to .bashrc or .zshrc.
-	```bash
-	export PATH=/usr/local/cuda-12.1/bin${PATH:+:${PATH}}
-	export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-	```
+```bash
+export PATH=/usr/local/cuda-12.1/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+```
 
 4.  Restart Terminal and verify CUDA installation.
 ```bash
-	nvcc --version
+nvcc --version
 ```
 
 If you get errors in WSL, add following PATH in your WSL's .bashrc.
 
 ```bash
-	export PATH=/usr/lib/wsl/lib/:$PATH
+export PATH=/usr/lib/wsl/lib/:$PATH
 ```
 
-Then rerun the `nvcc --version` command.
+Then rerun the `nvcc --version` command. If the output shows your CUDA install version, you are good to go.
 
-If the output shows your CUDA install version, you are good to go.
 
-5. \[VERYY IMPORTANT FOR Ubuntu distro] Do the following step to remove the network repo form Ubuntu or else it will cause some annoying errors in next installations. NOT REQUIRED FOR WSL.
+**[VERYY IMPORTANT FOR Ubuntu distro]** Do the following step to remove the network repo form Ubuntu or else it will cause some annoying errors in next installations. NOT REQUIRED FOR WSL.
 
 	```bash
 	sudo mv cuda-ubuntu2204-x86_64.list cuda-ubuntu2204-x86_64.list.bak
@@ -72,7 +74,7 @@ If the output shows your CUDA install version, you are good to go.
 
 1. Open [official guide](https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html).
 2. Register a account for nvidia developers.
-3. Download the ubuntu local deb file for cuDNN 8.9.0. and cuda 12.*.
+3. Download the ubuntu local deb file for cuDNN 8.9.4. and cuda 12.*.
 4. Add the local repo and keyring.
 
 	```bash
@@ -100,30 +102,30 @@ If the output shows your CUDA install version, you are good to go.
 
 	- Open CMD as Administrator. Execute following commands one by one.
 	```PowerShell
-		cd C:\Windows\System32\lxss\lib
-		del libcuda.so
-		del libcuda.so.1
-		wsl -e /bin/bash
+	cd C:\Windows\System32\lxss\lib
+	del libcuda.so
+	del libcuda.so.1
+	wsl -e /bin/bash
 		
-		ln -s libcuda.so.1.1 libcuda.so.1
-		ln -s libcuda.so.1.1 libcuda.so
-		exit
+	ln -s libcuda.so.1.1 libcuda.so.1
+	ln -s libcuda.so.1.1 libcuda.so
+	exit
 		
-		wsl --shutdown
-		wsl -e /bin/bash
-		sudo ldconfig
-		exit
+	wsl --shutdown
+	wsl -e /bin/bash
+	sudo ldconfig
+	exit
 	```
 
 9. Now test your cuDNN in WSL as mentioned below. 
-	1. Copy cuDNN samples to home directory.
-			`cp -r /usr/src/cudnn_samples_v8/ $HOME`
-	2. Go to the writable path.
-			`cd $HOME/cudnn_samples_v8/mnistCUDNN`
-	3. Compile the `mnistCUDNN` sample
-			`make clean && make`
-	3. Run the `mnistCUDNN` sample.
-			`./mnistCUDNN`
+	1. Copy cuDNN samples to home directory.<br>
+		`cp -r /usr/src/cudnn_samples_v8/ $HOME`
+	2. Go to the writable path.<br>
+		`cd $HOME/cudnn_samples_v8/mnistCUDNN`
+	3. Compile the `mnistCUDNN` sample.<br>
+		`make clean && make`
+	3. Run the `mnistCUDNN` sample.<br>
+		`./mnistCUDNN`
 	 
 	 If the test passes, you are good to go.
 
