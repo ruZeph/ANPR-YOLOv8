@@ -12,14 +12,14 @@ if __name__ == '__main__':
     file_paths = sorted(list(paths.list_images(OCR_PATH)), reverse=False)
     bbox_file_paths = sorted(([os.path.join(BBOX_PATH, filename) for filename in os.listdir(BBOX_PATH) if filename.endswith('.pkl')]), reverse=False)
     
-    count = 1
+    idx_count = 1
 
     for file_path, bbox_file_path in zip(file_paths, bbox_file_paths):
         # Load the image
         print(file_path)
         clean_img = cv2.imread(file_path)
-        show_img(str("Original Image" + str(count)),clean_img)
-        count+=1    
+        show_img(str("Original Image" + str(idx_count)),clean_img)
+        idx_count+=1    
         org_title = file_path.split('/')[-1]
         op_path = 'OCR_Output/'
         
