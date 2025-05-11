@@ -1,1 +1,4 @@
 .sshwd/*
+.idea/*
+__pycache__/*
+characters_model.weights

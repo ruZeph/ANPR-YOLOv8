@@ -157,7 +157,7 @@ def clean_license_plate(lic_plate, shape, op_path=None, org_title=None):
         keep_height = 75 < h < 115
         keep_area = 1250 < area < 4000
         # ensure the connected component we are examining passes all
-        # three tests
+        # three tests (This is heurritic, change for accurate matching)
         if all((keep_width, keep_height, keep_area)):
             # construct a mask for the current connected component and
             # then take the bitwise OR with the mask

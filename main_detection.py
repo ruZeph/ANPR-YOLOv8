@@ -1,16 +1,23 @@
 import os
-
+import OCR_Code
+import pickle
 import cv2
 from imutils import paths
 import anpr_YOLOv8 as ANPR
 from essentials import mk_title
+from essentials import show_img
 
 if __name__ == '__main__':
     # This is for mass input
     IMG_PATH = 'bike_samples/'
+    if not os.path.exists(IMG_PATH):
+        print("Sample Images not found. Please check the path and try again.")
     file_paths = sorted(list(paths.list_images(IMG_PATH)), reverse=False)
-    # print(file_paths)
 
+    # Create main Results directory if it doesn't exist
+    RESULTS_DIR = "Results/"
+    if not os.path.exists(RESULTS_DIR):
+        os.makedirs(RESULTS_DIR)
 
     # Get the license plates using Y0L0v8 Model in the Predefined Resolution
     for file_path in file_paths:
@@ -18,22 +25,24 @@ if __name__ == '__main__':
         path = str(file_path)
         remove = ".jpg"
         bare_name = path.replace(remove, '') # bare_name = Name OF Image without extension
-        print
-        op_path = "results/" + bare_name + '/'
+        print(f"Processing: {path}")  # Fix the standalone print
         org_title = bare_name.replace(IMG_PATH, '')
-        clean_img_path = "Cleaned_License_Plate/"
-
-        if not os.path.exists(op_path):
-            os.makedirs(op_path)
-            
-        if not os.path.exists(clean_img_path):
-            os.makedirs(clean_img_path)
+        
+        # Create individual results folders within the main Results directory
+        op_path = os.path.join(RESULTS_DIR, org_title, "detection/")
+        clean_img_path = os.path.join(RESULTS_DIR, org_title, "cleaned_plate/")    
+        ocr_output_path = os.path.join(RESULTS_DIR, org_title, "ocr_output/")
+        
+        # Create directories if they don't exist
+        for directory in [op_path, clean_img_path, ocr_output_path]:
+            if not os.path.exists(directory):
+                os.makedirs(directory)
 
         org_img = cv2.imread(file_path)
         img_cvt = cv2.resize(org_img, (1280, 720))
 
         title = "0_" + "Original Image"
-        # ANPR.show_img(title, img_cvt)/home/avisek
+        # ANPR.show_img(title, img_cvt)
         output_txt = mk_title(org_title, title)
         ANPR.save_img(op_path, output_txt, img_cvt)
 
@@ -63,6 +72,9 @@ if __name__ == '__main__':
 
             # Character Segmentation
             lPlate, segments, bounding_boxes = ANPR.segment_lic_plate(clean_img, op_path, org_title, clean_img_path)
-
-       
-
+            
+            # Run OCR directly on the segmented image and bounding boxes
+            result_img, license_number = OCR_Code.apply_ocr(lPlate, bounding_boxes, ocr_output_path, org_title)
+            
+            print("License Plate Number:", license_number)
+            print("--------------------------------------------------")
