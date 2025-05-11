@@ -33,7 +33,15 @@ Follow the steps below to build and run the project using Docker. This setup eli
 
 ---
 
-### Step 1: Prepare Docker Environment
+### Step 1: Prepare Project.
+
+1. First Clone the repo.
+2. Download the character model from the link: [MEGA](https://mega.nz/file/6ZclwBoC#CoSjE68a6P85UHDIYhPL26IjCyssvy7pL6vwxs-xGKw) 
+3. Put it in `weights/` folder.
+
+---
+
+### Step 2: Setup Docker
 
 1. Ensure you have Docker installed and running in WSL.
 
@@ -97,9 +105,9 @@ Follow the steps below to build and run the project using Docker. This setup eli
 
 ---
 
-### Step 2: Running the Project Container
+### Step 3: Running the Project Container
 
-1. Define your project folder location in a variable for easier reference:
+1. Define your project folder(cloned repo) location in a variable for easier reference:
 
     ```bash
     PROJECT=/path/to/your/project
